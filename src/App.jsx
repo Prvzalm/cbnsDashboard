@@ -8,9 +8,24 @@ import Sidebar from "./components/Sidebar";
 import Dashboard from "./components/Dashboard";
 import Blog from "./components/Blog";
 import Login from "./components/Login";
+import { useEffect, useState } from "react";
+import BlogForm from "./components/BlogForm";
 
 const App = () => {
-  const isAuthenticated = sessionStorage.getItem("isAuthenticated");
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    sessionStorage.getItem("isAuthenticated") === "true"
+  );
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const auth = sessionStorage.getItem("isAuthenticated") === "true";
+      setIsAuthenticated(auth);
+    };
+
+    window.addEventListener("storage", checkAuth); // Handle cross-tab login/logout
+    return () => window.removeEventListener("storage", checkAuth);
+  }, []);
+
   return (
     <Router>
       <Routes>
@@ -18,7 +33,7 @@ const App = () => {
           path="/"
           element={
             isAuthenticated ? (
-              <Sidebar />
+              <Sidebar setIsAuthenticated={setIsAuthenticated} />
             ) : (
               <Navigate to="/login" replace /> // Redirect if not logged in
             )
@@ -26,9 +41,18 @@ const App = () => {
         >
           <Route index element={<Dashboard />} />
           <Route path="blog" element={<Blog />} />
+          <Route path="blog/new" element={<BlogForm />} />
+          <Route path="blog/edit" element={<BlogForm />} />
         </Route>
 
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={<Login setIsAuthenticated={setIsAuthenticated} />}
+        />
+        <Route
+          path="*"
+          element={<Navigate to={isAuthenticated ? "/" : "/login"} replace />}
+        />
       </Routes>
     </Router>
   );

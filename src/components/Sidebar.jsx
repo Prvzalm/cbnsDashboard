@@ -1,18 +1,19 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { BlogIcon, DashboardIcon } from "../assets";
+import { BlogIcon, DashboardIcon, Logout } from "../assets";
 
-const Sidebar = () => {
+const Sidebar = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    sessionStorage.remove("isAuthenticated");
+    sessionStorage.removeItem("isAuthenticated");
+    setIsAuthenticated(false);
     navigate("/", { replace: true });
   };
 
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-900 text-white flex flex-col justify-between">
+      <div className="w-64 bg-[#212529] text-white flex flex-col justify-between">
         <div>
           {/* Logo */}
           <div className="flex items-center justify-center h-20 border-b border-gray-700">
@@ -48,9 +49,9 @@ const Sidebar = () => {
         <div className="border-t border-gray-700">
           <button
             onClick={handleLogout}
-            className="flex items-center px-4 py-3 hover:bg-gray-700"
+            className="w-full flex items-center px-4 py-3"
           >
-            <span className="text-lg">🚪</span>
+            <img className="w-6 h-6 bg-white" src={Logout} alt="" />
             <span className="ml-3">Logout</span>
           </button>
         </div>

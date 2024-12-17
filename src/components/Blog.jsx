@@ -1,4 +1,48 @@
+import { useEffect, useState } from "react";
+import { DeleteIcon, EditIcon } from "../assets";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 const Blog = () => {
+  const navigate = useNavigate();
+  const [blogs, setBlogs] = useState([]);
+
+  const handleOpenBlogFrom = () => {
+    navigate("new");
+  };
+
+  const handleEditBlog = (initialBlog, blogId) => {
+    navigate("edit", { state: { initialBlog, blogId } });
+  };
+
+  const fetchBlogs = async () => {
+    try {
+      const response = await axios.get("https://blog.cribonix.com/api/blogs");
+      if (response) {
+        setBlogs(response.data);
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+    }
+  };
+
+  const deleteBlog = async (id) => {
+    try {
+      await axios.delete(`https://blog.cribonix.com/api/blogs/${id}`);
+      toast.success("Blog deleted successfully!");
+      fetchBlogs();
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
   return (
     <div>
       {/* Header */}
@@ -6,7 +50,10 @@ const Blog = () => {
       <p className="text-gray-500 mb-6">Dashboard / Blog</p>
 
       {/* Add Blog Button */}
-      <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 mb-6">
+      <button
+        onClick={handleOpenBlogFrom}
+        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 mb-6"
+      >
         + New Blog
       </button>
 
@@ -23,36 +70,32 @@ const Blog = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-t">
-              <td className="py-2 px-4">1</td>
-              <td className="py-2 px-4">16/12/2024</td>
-              <td className="py-2 px-4">Lorem Dolor is simple dummy</td>
-              <td className="py-2 px-4">
-                Lorem Dolor is simple dummy Lorem Dolor is simple
-              </td>
-              <td className="py-2 px-4">
-                <button className="mr-2 p-2 bg-gray-200 rounded hover:bg-gray-300">
-                  ✏️
-                </button>
-                <button className="p-2 bg-red-500 text-white rounded hover:bg-red-600">
-                  🗑️
-                </button>
-              </td>
-            </tr>
-            <tr className="border-t">
-              <td className="py-2 px-4">2</td>
-              <td className="py-2 px-4">16/12/2024</td>
-              <td className="py-2 px-4">Lorem Dolor is simple dummy</td>
-              <td className="py-2 px-4">Lorem Dolor is simple dummy</td>
-              <td className="py-2 px-4">
-                <button className="mr-2 p-2 bg-gray-200 rounded hover:bg-gray-300">
-                  ✏️
-                </button>
-                <button className="p-2 bg-red-500 text-white rounded hover:bg-red-600">
-                  🗑️
-                </button>
-              </td>
-            </tr>
+            {blogs.map((blog, index) => (
+              <tr key={blog._id} className="border-t">
+                <td className="py-2 px-4">{index + 1}</td>
+                <td className="py-2 px-4">
+                  {new Date(blog.createdAt).toLocaleDateString()}
+                </td>
+                <td
+                  onClick={() => handleEditBlog(blog, blog._id)}
+                  className="py-2 px-4 cursor-pointer"
+                >
+                  {blog.heading1.slice(0, 50)}...
+                </td>
+                <td className="py-2 px-4">{blog.content1.slice(0, 50)}...</td>
+                <td className="py-2 px-4">
+                  <button className="mr-2 p-2 rounded">
+                    <img className="w-10 h-10" src={EditIcon} alt="" />
+                  </button>
+                  <button
+                    onClick={() => deleteBlog(blog._id)}
+                    className="p-2 text-white rounded"
+                  >
+                    <img className="w-10 h-10" src={DeleteIcon} alt="" />
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

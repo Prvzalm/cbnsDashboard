@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginLeft, LoginRight } from "../assets";
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate(); // For navigation
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,8 +16,9 @@ const Login = () => {
     e.preventDefault();
 
     if (email === validEmail && password === validPassword) {
-      navigate("/", { replace: true });
       sessionStorage.setItem("isAuthenticated", true);
+      setIsAuthenticated(true);
+      navigate("/", { replace: true });
     } else {
       // Show error message
       setError("Invalid email or password");
@@ -25,7 +26,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-screen">
       {/* Left Section */}
       <div className="flex flex-col justify-center items-center w-1/3 bg-[#1F1F1F] text-white p-8">
         <h1 className="text-4xl font-bold mb-4">Admin Login</h1>
