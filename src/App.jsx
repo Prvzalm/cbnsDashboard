@@ -10,6 +10,8 @@ import Blog from "./components/Blog";
 import Login from "./components/Login";
 import { useEffect, useState } from "react";
 import BlogForm from "./components/BlogForm";
+import Portfolio from "./components/Portfolio/Portfolio";
+import PortfolioForm from "./components/Portfolio/PortfolioForm";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -40,6 +42,9 @@ const App = () => {
           }
         >
           <Route index element={<Dashboard />} />
+          <Route path="portfolio" element={<Portfolio />} />
+          <Route path="portfolio/new" element={<PortfolioForm />} />
+          <Route path="portfolio/edit" element={<PortfolioForm />} />
           <Route path="blog" element={<Blog />} />
           <Route path="blog/new" element={<BlogForm />} />
           <Route path="blog/edit" element={<BlogForm />} />

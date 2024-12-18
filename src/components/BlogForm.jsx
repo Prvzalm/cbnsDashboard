@@ -103,7 +103,7 @@ const BlogForm = () => {
         toast.success("Blog created successfully!");
         console.log("Blog created:", response.data);
       }
-      navigate(-1); // Navigate back
+      navigate(-1);
     } catch (error) {
       console.error("Error submitting blog:", error);
       toast.error("Failed to submit blog. Please try again.");
