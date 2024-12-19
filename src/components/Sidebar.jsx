@@ -50,6 +50,15 @@ const Sidebar = ({ setIsAuthenticated }) => {
                   <span className="ml-3">PORTFOLIO</span>
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/testimonial"
+                  className="flex items-center px-4 py-3 hover:bg-gray-700"
+                >
+                  <img className="w-6 h-6" src={BlogIcon} alt="" />{" "}
+                  <span className="ml-3">TESTIMONIAL</span>
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>

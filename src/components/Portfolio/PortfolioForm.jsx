@@ -46,9 +46,16 @@ const PortfolioForm = () => {
   };
 
   // Handle homepage image upload
-  const handleHomePageImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) setHomePageImage(URL.createObjectURL(file));
+  // const handleHomePageImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) setHomePageImage(URL.createObjectURL(file));
+  // };
+
+  const handleHomePageImageURLChange = (e) => {
+    const url = e.target.value;
+    if (url) {
+      setHomePageImage(url); // Assuming setHomePageImage is your state setter
+    }
   };
 
   // Add new gallery item
@@ -64,11 +71,12 @@ const PortfolioForm = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Prepare payload
     const payload = {
       portfolioName,
+      headingOne,
+      headingTwo,
+      homePageImage,
       description,
-      homePageImage: homePageImage || "https://picsum.photos/id/237/536/354", // Use existing or placeholder image
       imageGallery,
     };
 
@@ -141,9 +149,9 @@ const PortfolioForm = () => {
             ) : (
               <input
                 type="text"
-                value={portfolioName}
-                onChange={(e) => setPortfolioName(e.target.value)}
-                placeholder="Enter portfolio name"
+                value={homePageImage}
+                onChange={handleHomePageImageURLChange}
+                placeholder="Paste image URL here"
                 className="w-full border rounded px-4 py-2 mb-2"
               />
             )}
@@ -240,26 +248,21 @@ const PortfolioForm = () => {
         </div>
 
         {/* Right Section */}
-        <div className="w-1/4 flex flex-col items-center">
-          <div className="border border-gray-300 rounded-lg p-4 w-full mb-4">
-            <div className="text-gray-500 text-center mb-2">
-              Please select your homepage image
-            </div>
-            <label
-              htmlFor="homePageImageUpload"
-              className="flex items-center justify-center cursor-pointer text-blue-600 border-dashed border-2 rounded py-2"
-            >
-              <span>⬆ UPLOAD HOMEPAGE IMAGE</span>
+        {homePageImage && (
+          <div className="w-1/4 flex flex-col items-center">
+            <div className="border border-gray-300 rounded-lg p-4 w-full mb-4">
+              <div className="text-gray-500 text-center mb-2">
+                Please select or paste your homepage image URL
+              </div>
               <input
-                type="file"
-                id="homePageImageUpload"
-                accept="image/*"
-                onChange={handleHomePageImageChange}
-                className="hidden"
+                type="text"
+                placeholder="Paste image URL here"
+                onChange={handleHomePageImageURLChange}
+                className="w-full border border-gray-300 rounded p-2 text-sm"
               />
-            </label>
+            </div>
           </div>
-        </div>
+        )}
       </form>
 
       {/* Buttons */}

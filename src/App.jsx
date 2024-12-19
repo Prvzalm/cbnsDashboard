@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import BlogForm from "./components/BlogForm";
 import Portfolio from "./components/Portfolio/Portfolio";
 import PortfolioForm from "./components/Portfolio/PortfolioForm";
+import Testimonials from "./components/Testimonials/Testimonials";
+import TestimonialForm from "./components/Testimonials/TestimonialForm";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -48,6 +50,9 @@ const App = () => {
           <Route path="blog" element={<Blog />} />
           <Route path="blog/new" element={<BlogForm />} />
           <Route path="blog/edit" element={<BlogForm />} />
+          <Route path="testimonial" element={<Testimonials />} />
+          <Route path="testimonial/new" element={<TestimonialForm />} />
+          <Route path="testimonial/edit" element={<TestimonialForm />} />
         </Route>
 
         <Route
