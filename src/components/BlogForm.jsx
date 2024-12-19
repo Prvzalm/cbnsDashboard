@@ -59,8 +59,8 @@ const BlogForm = () => {
 
   // Handle image upload
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) setImage(URL.createObjectURL(file));
+    const file = e.target.value;
+    if (file) setImage(file);
   };
 
   // Handle form submission (POST or PATCH)
@@ -70,7 +70,7 @@ const BlogForm = () => {
 
     // Prepare payload
     const payload = {
-      image: image || "https://picsum.photos/id/237/536/354", // Use existing image or placeholder
+      image: image, // Use existing image or placeholder
       heading1: formFields[0].heading,
       content1: formFields[0].content,
       heading2: formFields[1].heading,
@@ -166,20 +166,19 @@ const BlogForm = () => {
               />
             ) : (
               <div className="text-gray-500 text-center mb-2">
-                Please select your image for blog
+                Please select or paste your image for blog
               </div>
             )}
             <label
               htmlFor="imageUpload"
               className="flex items-center justify-center cursor-pointer text-blue-600 border-dashed border-2 rounded py-2"
             >
-              <span>⬆ UPLOAD IMAGE</span>
               <input
-                type="file"
+                type="text"
                 id="imageUpload"
-                accept="image/*"
+                placeholder="Paste image URL here"
                 onChange={handleImageChange}
-                className="hidden"
+                className="w-full border border-gray-300 rounded p-2 text-sm"
               />
             </label>
           </div>
