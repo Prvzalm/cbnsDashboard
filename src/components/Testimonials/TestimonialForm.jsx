@@ -13,6 +13,7 @@ const TestimonialForm = () => {
   const [formFields, setFormFields] = useState({
     nameAndDesignation: "",
     reviewTitle: "",
+    rating: "",
     review: "",
   });
 
@@ -24,6 +25,7 @@ const TestimonialForm = () => {
       setFormFields({
         nameAndDesignation: initialTestimonial.nameAndDesignation || "",
         reviewTitle: initialTestimonial.reviewTitle || "",
+        rating: initialTestimonial.rating || "",
         review: initialTestimonial.review || "",
       });
     }
@@ -46,6 +48,7 @@ const TestimonialForm = () => {
     const payload = {
       nameAndDesignation: formFields.nameAndDesignation,
       reviewTitle: formFields.reviewTitle,
+      rating: formFields.rating,
       review: formFields.review,
     };
 
@@ -113,6 +116,17 @@ const TestimonialForm = () => {
             value={formFields.reviewTitle}
             onChange={(e) => handleInputChange("reviewTitle", e.target.value)}
             placeholder="Enter review title"
+            className="w-full border rounded px-4 py-2 mb-2"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Rating</label>
+          <input
+            type="text"
+            value={formFields.rating}
+            onChange={(e) => handleInputChange("rating", e.target.value)}
+            placeholder="Enter rating"
             className="w-full border rounded px-4 py-2 mb-2"
           />
         </div>

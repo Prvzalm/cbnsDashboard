@@ -68,6 +68,7 @@ const Testimonials = () => {
               <th className="py-2 px-4">Name and Designation</th>
               <th className="py-2 px-4">Review Title</th>
               <th className="py-2 px-4">Review</th>
+              <th className="py-2 px-4">Rating</th>
               <th className="py-2 px-4">Actions</th>
             </tr>
           </thead>
@@ -78,6 +79,7 @@ const Testimonials = () => {
                 <td className="py-2 px-4">{testimonial.nameAndDesignation}</td>
                 <td className="py-2 px-4">{testimonial.reviewTitle}</td>
                 <td className="py-2 px-4">{testimonial.review}</td>
+                <td className="py-2 px-4">{testimonial.rating}</td>
                 <td className="py-2 px-4">
                   <button
                     onClick={() =>
