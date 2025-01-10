@@ -11,7 +11,8 @@ const TestimonialForm = () => {
   const { initialTestimonial, testimonialId } = location.state || {};
   // State for form fields
   const [formFields, setFormFields] = useState({
-    nameAndDesignation: "",
+    name: "",
+    designation: "",
     reviewTitle: "",
     rating: "",
     review: "",
@@ -23,7 +24,8 @@ const TestimonialForm = () => {
   useEffect(() => {
     if (initialTestimonial) {
       setFormFields({
-        nameAndDesignation: initialTestimonial.nameAndDesignation || "",
+        name: initialTestimonial.name || "",
+        designation: initialTestimonial.designation || "",
         reviewTitle: initialTestimonial.reviewTitle || "",
         rating: initialTestimonial.rating || "",
         review: initialTestimonial.review || "",
@@ -46,11 +48,14 @@ const TestimonialForm = () => {
 
     // Prepare payload
     const payload = {
-      nameAndDesignation: formFields.nameAndDesignation,
+      name: formFields.name,
+      designation: formFields.designation,
       reviewTitle: formFields.reviewTitle,
       rating: formFields.rating,
       review: formFields.review,
     };
+
+    console.log(payload);
 
     try {
       if (testimonialId) {
@@ -93,16 +98,25 @@ const TestimonialForm = () => {
       <form onSubmit={handleSubmit} className="flex flex-col">
         {/* Input Fields */}
         <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Name</label>
+          <input
+            type="text"
+            value={formFields.name}
+            onChange={(e) => handleInputChange("name", e.target.value)}
+            placeholder="Enter name"
+            className="w-full border rounded px-4 py-2 mb-2"
+          />
+        </div>
+
+        <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">
-            Name and Designation
+            Designation
           </label>
           <input
             type="text"
-            value={formFields.nameAndDesignation}
-            onChange={(e) =>
-              handleInputChange("nameAndDesignation", e.target.value)
-            }
-            placeholder="Enter name and designation"
+            value={formFields.designation}
+            onChange={(e) => handleInputChange("designation", e.target.value)}
+            placeholder="Enter designation"
             className="w-full border rounded px-4 py-2 mb-2"
           />
         </div>
@@ -123,10 +137,19 @@ const TestimonialForm = () => {
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">Rating</label>
           <input
-            type="text"
+            type="number"
+            min="1"
+            max="5"
+            step="1"
             value={formFields.rating}
-            onChange={(e) => handleInputChange("rating", e.target.value)}
-            placeholder="Enter rating"
+            onChange={(e) => {
+              const value = e.target.value;
+              handleInputChange(
+                "rating",
+                value === "" ? "" : Math.max(1, Math.min(5, Math.floor(value)))
+              );
+            }}
+            placeholder="Enter rating (1-5)"
             className="w-full border rounded px-4 py-2 mb-2"
           />
         </div>

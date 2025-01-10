@@ -18,6 +18,9 @@ const PortfolioForm = () => {
   const [imageGallery, setImageGallery] = useState([
     { heading: "", content: "", imgUrl: "" },
   ]);
+  const [videoGallery, setVideoGallery] = useState([
+    { heading: "", content: "", videoUrl: "" },
+  ]);
   const [loading, setLoading] = useState(false);
 
   // Pre-fill fields if initialPortfolio exists (editing mode)
@@ -35,6 +38,13 @@ const PortfolioForm = () => {
           imgUrl: image.imgUrl || "",
         })) || [{ heading: "", content: "", imgUrl: "" }]
       );
+      setVideoGallery(
+        initialPortfolio.videoGallery?.map((video) => ({
+          heading: video.heading || "",
+          content: video.content || "",
+          videoUrl: video.videoUrl || "",
+        })) || [{ heading: "", content: "", videoUrl: "" }]
+      );
     }
   }, [initialPortfolio]);
 
@@ -45,16 +55,17 @@ const PortfolioForm = () => {
     setImageGallery(updatedGallery);
   };
 
-  // Handle homepage image upload
-  // const handleHomePageImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) setHomePageImage(URL.createObjectURL(file));
-  // };
+  const handleVideoGalleryChange = (index, field, value) => {
+    const updatedGallery = [...videoGallery];
+    updatedGallery[index][field] = value;
+    setVideoGallery(updatedGallery);
+  };
 
+  // Handle homepage image upload
   const handleHomePageImageURLChange = (e) => {
     const url = e.target.value;
     if (url) {
-      setHomePageImage(url); // Assuming setHomePageImage is your state setter
+      setHomePageImage(url);
     }
   };
 
@@ -63,6 +74,13 @@ const PortfolioForm = () => {
     setImageGallery([
       ...imageGallery,
       { heading: "", content: "", imgUrl: "" },
+    ]);
+  };
+
+  const addVideoGalleryItem = () => {
+    setVideoGallery([
+      ...videoGallery,
+      { heading: "", content: "", videoUrl: "" },
     ]);
   };
 
@@ -78,6 +96,7 @@ const PortfolioForm = () => {
       homePageImage,
       description,
       imageGallery,
+      videoGallery,
     };
 
     console.log(payload);
@@ -241,6 +260,56 @@ const PortfolioForm = () => {
           <button
             type="button"
             onClick={addGalleryItem}
+            className="flex items-center text-blue-600 border-dashed border-2 rounded px-4 py-2 mt-4"
+          >
+            <FaPlus className="mr-2" /> Add
+          </button>
+
+          {videoGallery.map((video, index) => (
+            <div key={index} className="mb-4">
+              <label className="block text-gray-700 font-medium mb-1">
+                Video {index + 1} Heading
+              </label>
+              <input
+                type="text"
+                value={video.heading}
+                onChange={(e) =>
+                  handleVideoGalleryChange(index, "heading", e.target.value)
+                }
+                placeholder="Enter heading"
+                className="w-full border rounded px-4 py-2 mb-2"
+              />
+
+              <label className="block text-gray-700 font-medium mb-1">
+                Video {index + 1} Content
+              </label>
+              <textarea
+                value={video.content}
+                onChange={(e) =>
+                  handleVideoGalleryChange(index, "content", e.target.value)
+                }
+                placeholder="Enter content"
+                className="w-full border rounded px-4 py-2"
+                rows="4"
+              ></textarea>
+
+              <label className="block text-gray-700 font-medium mb-1">
+                Video {index + 1} URL
+              </label>
+              <input
+                type="text"
+                value={video.videoUrl}
+                onChange={(e) =>
+                  handleVideoGalleryChange(index, "videoUrl", e.target.value)
+                }
+                placeholder="Enter video URL"
+                className="w-full border rounded px-4 py-2 mb-2"
+              />
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={addVideoGalleryItem}
             className="flex items-center text-blue-600 border-dashed border-2 rounded px-4 py-2 mt-4"
           >
             <FaPlus className="mr-2" /> Add

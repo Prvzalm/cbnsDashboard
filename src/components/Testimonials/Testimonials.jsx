@@ -65,7 +65,8 @@ const Testimonials = () => {
           <thead>
             <tr className="bg-gray-100 text-left">
               <th className="py-2 px-4">#</th>
-              <th className="py-2 px-4">Name and Designation</th>
+              <th className="py-2 px-4">Name</th>
+              <th className="py-2 px-4">Designation</th>
               <th className="py-2 px-4">Review Title</th>
               <th className="py-2 px-4">Review</th>
               <th className="py-2 px-4">Rating</th>
@@ -76,7 +77,8 @@ const Testimonials = () => {
             {testimonials.map((testimonial, index) => (
               <tr key={testimonial._id} className="border-t">
                 <td className="py-2 px-4">{index + 1}</td>
-                <td className="py-2 px-4">{testimonial.nameAndDesignation}</td>
+                <td className="py-2 px-4">{testimonial.name}</td>
+                <td className="py-2 px-4">{testimonial.designation}</td>
                 <td className="py-2 px-4">{testimonial.reviewTitle}</td>
                 <td className="py-2 px-4">{testimonial.review}</td>
                 <td className="py-2 px-4">{testimonial.rating}</td>
