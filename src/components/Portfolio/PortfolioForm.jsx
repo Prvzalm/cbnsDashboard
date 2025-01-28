@@ -144,7 +144,7 @@ const PortfolioForm = () => {
         <div className="w-3/4 mr-4">
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-1">
-              Portfolio Name
+              Portfolio Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -157,7 +157,7 @@ const PortfolioForm = () => {
 
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-1">
-              Home Page Image
+              Home Page Image <span className="text-red-500">*</span>
             </label>
             {homePageImage ? (
               <img
@@ -178,7 +178,7 @@ const PortfolioForm = () => {
 
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-1">
-              Heading One
+              Heading One <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -191,7 +191,7 @@ const PortfolioForm = () => {
 
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-1">
-              Heading Two
+              Heading Two <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -244,7 +244,7 @@ const PortfolioForm = () => {
               ></textarea>
 
               <label className="block text-gray-700 font-medium mb-1">
-                Image {index + 1} URL
+                Image {index + 1} URL <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"

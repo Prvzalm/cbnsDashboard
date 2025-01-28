@@ -127,7 +127,7 @@ const BlogForm = () => {
           {formFields.map((field, index) => (
             <div key={index} className="mb-4">
               <label className="block text-gray-700 font-medium mb-1">
-                Heading {index + 1}
+                Heading {index + 1} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -166,7 +166,7 @@ const BlogForm = () => {
               />
             ) : (
               <div className="text-gray-500 text-center mb-2">
-                Please select or paste your image for blog
+                Please select or paste your image for blog <span className="text-red-500">*</span>
               </div>
             )}
             <label

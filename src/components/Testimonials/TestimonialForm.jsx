@@ -16,6 +16,7 @@ const TestimonialForm = () => {
     reviewTitle: "",
     rating: "",
     review: "",
+    img: "", // New field for image URL
   });
 
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ const TestimonialForm = () => {
         reviewTitle: initialTestimonial.reviewTitle || "",
         rating: initialTestimonial.rating || "",
         review: initialTestimonial.review || "",
+        img: initialTestimonial.img || "", // Pre-fill img if exists
       });
     }
   }, [initialTestimonial]);
@@ -53,6 +55,7 @@ const TestimonialForm = () => {
       reviewTitle: formFields.reviewTitle,
       rating: formFields.rating,
       review: formFields.review,
+      img: formFields.img, // Include image URL in the payload
     };
 
     console.log(payload);
@@ -98,7 +101,7 @@ const TestimonialForm = () => {
       <form onSubmit={handleSubmit} className="flex flex-col">
         {/* Input Fields */}
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-1">Name</label>
+          <label className="block text-gray-700 font-medium mb-1">Name <span className="text-red-500">*</span></label>
           <input
             type="text"
             value={formFields.name}
@@ -110,7 +113,7 @@ const TestimonialForm = () => {
 
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">
-            Designation
+            Designation <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -123,7 +126,7 @@ const TestimonialForm = () => {
 
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-1">
-            Review Title
+            Review Title <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -135,7 +138,7 @@ const TestimonialForm = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-1">Rating</label>
+          <label className="block text-gray-700 font-medium mb-1">Rating <span className="text-red-500">*</span></label>
           <input
             type="number"
             min="1"
@@ -155,7 +158,7 @@ const TestimonialForm = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-1">Review</label>
+          <label className="block text-gray-700 font-medium mb-1">Review <span className="text-red-500">*</span></label>
           <textarea
             value={formFields.review}
             onChange={(e) => handleInputChange("review", e.target.value)}
@@ -163,6 +166,18 @@ const TestimonialForm = () => {
             className="w-full border rounded px-4 py-2"
             rows="4"
           ></textarea>
+        </div>
+
+        {/* Image URL Input Field */}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-medium mb-1">Image URL</label>
+          <input
+            type="text"
+            value={formFields.img}
+            onChange={(e) => handleInputChange("img", e.target.value)}
+            placeholder="Enter image URL"
+            className="w-full border rounded px-4 py-2 mb-2"
+          />
         </div>
 
         {/* Buttons */}
