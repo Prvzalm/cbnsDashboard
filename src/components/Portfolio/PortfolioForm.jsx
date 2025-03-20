@@ -105,7 +105,7 @@ const PortfolioForm = () => {
       if (portfolioId) {
         // PATCH request (update existing portfolio)
         const response = await axios.patch(
-          `https://blog.cribonix.com/api/portfolios/${portfolioId}`,
+          `https://blog.cribonix.in/api/portfolios/${portfolioId}`,
           payload,
           { headers: { "Content-Type": "application/json" } }
         );
@@ -114,7 +114,7 @@ const PortfolioForm = () => {
       } else {
         // POST request (create new portfolio)
         const response = await axios.post(
-          "https://blog.cribonix.com/api/portfolios",
+          "https://blog.cribonix.in/api/portfolios",
           payload,
           { headers: { "Content-Type": "application/json" } }
         );

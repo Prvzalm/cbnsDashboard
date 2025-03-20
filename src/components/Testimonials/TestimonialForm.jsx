@@ -64,7 +64,7 @@ const TestimonialForm = () => {
       if (testimonialId) {
         // PATCH request (update existing testimonial)
         const response = await axios.patch(
-          `https://blog.cribonix.com/api/testimonials/${testimonialId}`,
+          `https://blog.cribonix.in/api/testimonials/${testimonialId}`,
           payload,
           { headers: { "Content-Type": "application/json" } }
         );
@@ -73,7 +73,7 @@ const TestimonialForm = () => {
       } else {
         // POST request (create new testimonial)
         const response = await axios.post(
-          "https://blog.cribonix.com/api/testimonials",
+          "https://blog.cribonix.in/api/testimonials",
           payload,
           { headers: { "Content-Type": "application/json" } }
         );

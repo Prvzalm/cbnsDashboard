@@ -19,7 +19,7 @@ const Portfolio = () => {
   const fetchPortfolios = async () => {
     try {
       const response = await axios.get(
-        "https://blog.cribonix.com/api/portfolios"
+        "https://blog.cribonix.in/api/portfolios"
       );
       if (response) {
         setPortfolios(response.data);
@@ -32,7 +32,7 @@ const Portfolio = () => {
 
   const handleDeleteBlog = async (id) => {
     try {
-      await axios.delete(`https://blog.cribonix.com/api/portfolios/${id}`);
+      await axios.delete(`https://blog.cribonix.in/api/portfolios/${id}`);
       toast.success("Blog deleted successfully!");
       fetchPortfolios();
     } catch (error) {

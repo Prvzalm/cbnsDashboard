@@ -19,7 +19,7 @@ const Testimonials = () => {
   const fetchTestimonials = async () => {
     try {
       const response = await axios.get(
-        "https://blog.cribonix.com/api/testimonials"
+        "https://blog.cribonix.in/api/testimonials"
       );
       if (response) {
         setTestimonials(response.data);
@@ -32,7 +32,7 @@ const Testimonials = () => {
 
   const deleteTestimonial = async (id) => {
     try {
-      await axios.delete(`https://blog.cribonix.com/api/testimonials/${id}`);
+      await axios.delete(`https://blog.cribonix.in/api/testimonials/${id}`);
       toast.success("Testimonial deleted successfully!");
       fetchTestimonials();
     } catch (error) {

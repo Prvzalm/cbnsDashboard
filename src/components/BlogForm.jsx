@@ -87,7 +87,7 @@ const BlogForm = () => {
       if (blogId) {
         // PATCH request (update existing blog)
         const response = await axios.patch(
-          `https://blog.cribonix.com/api/blogs/${blogId}`,
+          `https://blog.cribonix.in/api/blogs/${blogId}`,
           payload,
           { headers: { "Content-Type": "application/json" } }
         );
@@ -96,7 +96,7 @@ const BlogForm = () => {
       } else {
         // POST request (create new blog)
         const response = await axios.post(
-          "https://blog.cribonix.com/api/blogs",
+          "https://blog.cribonix.in/api/blogs",
           payload,
           { headers: { "Content-Type": "application/json" } }
         );

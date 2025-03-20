@@ -18,7 +18,7 @@ const Blog = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get("https://blog.cribonix.com/api/blogs");
+      const response = await axios.get("https://blog.cribonix.in/api/blogs");
       if (response) {
         setBlogs(response.data);
       }
@@ -30,7 +30,7 @@ const Blog = () => {
 
   const deleteBlog = async (id) => {
     try {
-      await axios.delete(`https://blog.cribonix.com/api/blogs/${id}`);
+      await axios.delete(`https://blog.cribonix.in/api/blogs/${id}`);
       toast.success("Blog deleted successfully!");
       fetchBlogs();
     } catch (error) {
